@@ -1,4 +1,7 @@
 
+//front end = vue, server = node + middleware = express, database = mongoDB
+
+
 var http = require('http')
 
 function requestHandler(request, response){
