@@ -2,9 +2,11 @@
   "name": "cw2-single",
   "version": "1.0.0",
   "description": "CW2 Single Work",
-  "main": "node-demo.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start1": "nodemon route.js"
   },
   "repository": {
     "type": "git",
