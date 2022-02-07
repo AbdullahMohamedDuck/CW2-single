@@ -38,7 +38,7 @@ app.use(function(req, res) {
     // Sets the status code to 404
     res.status(404);
     // Sends the error "File not found!”
-    res.send("page not found!");
+    res.send("Page has not been found!");
     });
 
 //starts the app on port 3000
