@@ -20,6 +20,7 @@
   "homepage": "https://github.com/spades96/CW2-single#readme",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "mongodb": "^4.3.1"
   }
 }
