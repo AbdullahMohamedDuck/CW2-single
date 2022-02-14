@@ -17,37 +17,35 @@ mongoClient.connect('mongodb+srv://abdullah96:Narutoftw1@cluster0.uznfq.mongodb.
     db = client.db('webstore')
 })
 
-//multiple middlewares with 'next' middleware function for next middleware
-app.use(function(request, response, next) {
-    console.log('Income request for' + request.url)
-    next()
+//identify collection name for any requests (gets all collections from MongoDB)
+app.param('collectionName', function(req,res,next,collectionName){
+    req.collection = db.collection(collectionName)
+    return next()
 })
-// Requires the modules needed, file system, creates path users request
-var path = require("path");
-var fs = require("fs");
 
-//app.use = middleware, app.get = routing. Middleware last 
-app.use(function(req, res, next) {
-// Uses path.join to find the path where the file should be
-var filePath = path.join(__dirname, "images", req.url);
-// Built-in fs.stat gets info about a file
-fs.stat(filePath, function(err, fileInfo) {
-if (err) {
-next();
-return;
-}
-//check if file exists
-if (fileInfo.isFile()) res.sendFile(filePath);
-else next();
-    });
-});
+//root url REST API route (specify what collection/what the user wants, main directory)
+app.get('/',function(req,res){
+    res.send('Specify a collection please, E.G: collection/products to view lessons')
+})
 
-// error middleware
+//get all products, fetch
+app.get('/collection/:collectionName', function (req, res, next) {
+    req.collection.find({}).toArray(function(error, results){
+    if (error) {
+    return next(error)
+    }
+    else{
+    res.send(results)
+     }
+ })
+})
+
+// error handler middleware
 app.use(function(req, res) {
     // Sets the status code to 404
     res.status(404);
     // Sends the error "File not found!”
-    res.send("Page has not been found!");
+    res.send("Page has not been found!, please enter a valid input");
     });
 
 //starts the app on port 3000
