@@ -1,12 +1,21 @@
 
 //front end = vue, server = node + middleware = express, database = mongoDB
 
+//Calls express function to start new express application + others
+
 const express = require ('express');
 const cors = require('cors');
-
-//Calls express function to start new express application
 const app = express()
 app.use(cors())
+app.use(express.json())
+
+const mongoClient = require('mongodb').MongoClient
+
+//connect to mongoDB
+let db
+mongoClient.connect('mongodb+srv://abdullah96:Narutoftw1@cluster0.uznfq.mongodb.net/webstore?retryWrites=true&w=majority', function(err,client){
+    db = client.db('webstore')
+})
 
 //multiple middlewares with 'next' middleware function for next middleware
 app.use(function(request, response, next) {
