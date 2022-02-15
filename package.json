@@ -4,7 +4,7 @@
   "description": "CW2 Single Work",
   "main": "app.js",
   "scripts": {
-    "start": "node rest.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
