@@ -108,9 +108,6 @@ app.use(function(req, res) {
     res.send("Page has not been found!, please enter a valid input");
     });
 
-//starts the app on port 3000
-app.listen(3000, function(){
-
-    console.log('Express server has started.')
-
-})
+//Heroku start
+const port = process.env.PORT || 3000
+app.listen(port)
