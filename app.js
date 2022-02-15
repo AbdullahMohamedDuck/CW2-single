@@ -109,5 +109,7 @@ app.use(function(req, res) {
     });
 
 //Heroku start port
-const port = process.env.PORT || 3000;
-app.listen(port)
+const port = process.env.PORT || 3000
+app.listen(port, function () {
+    console.log("Listening 3000");
+});
