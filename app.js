@@ -60,6 +60,20 @@ app.get('/collection/:collectionName', function (req, res, next) {
  })
 })
 
+
+//Post order request - insert   
+app.post('/collection/:collectionName', function (req, res, next) {
+    req.collection.insert(req.body,function (error, results){
+    if (error) {
+    return next(error)
+    }
+    else{
+    res.send(results)
+     }
+ })
+})
+
+
 // error handler middleware
 app.use(function(req, res) {
     // Sets the status code to 404
