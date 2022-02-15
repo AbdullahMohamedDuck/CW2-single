@@ -1,7 +1,7 @@
 
 //front end = vue, server = node + middleware = express, database = mongoDB
 
-//Calls express function to start new express application + others
+//Calls express function to start new express application 
 
 const express = require ('express');
 const cors = require('cors');
@@ -34,7 +34,7 @@ var fs = require("fs");
 
  
 app.use(function(req, res, next) {
-    // Uses path.join to find the path where the file should be
+    // Uses path.join to find the path where the file should be. 
     var filePath = path.join(__dirname, "/staticimages", req.url);
     
     // Built-in fs.stat gets info about a file to check if file exists, if not move onto next
@@ -48,7 +48,7 @@ app.use(function(req, res, next) {
         });
     });
 
-//get all products, fetch
+//get all products
 app.get('/collection/:collectionName', function (req, res, next) {
     req.collection.find({}).toArray(function(error, results){
     if (error) {
@@ -71,6 +71,32 @@ app.post('/collection/:collectionName', function (req, res, next) {
     res.send(results)
      }
  })
+})
+
+//Get specific ID of product from MongoDb
+const ObjectID = require('mongodb').ObjectID;
+app.get('/collection/:collectionName/:id' , function (req, res, next) {
+req.collection.findOne({ _id: new ObjectID(req.params.id) }, function (error, results) {
+if (error) {
+    return next(error)
+    }
+    else {res.send(results)
+    }
+})
+})
+
+// Update ID
+app.put('/collection/:collectionName/:id', function (req, res, next) {
+    req.collection.updateOne(
+    {_id: new ObjectID(req.params.id)},
+    {$set: req.body},
+    {safe: true, multi: false}, function (error, results) {
+    if (error){ 
+        return next(error)
+    }
+    else {res.send(results)
+    }
+    })
 })
 
 
