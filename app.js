@@ -85,7 +85,7 @@ if (error) {
 })
 })
 
-// Update ID
+// Update ID (updated on req.body req)
 app.put('/collection/:collectionName/:id', function (req, res, next) {
     req.collection.updateOne(
     {_id: new ObjectID(req.params.id)},
