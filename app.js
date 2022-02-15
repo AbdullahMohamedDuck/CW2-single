@@ -48,6 +48,13 @@ app.use(function(req, res, next) {
         });
     });
 
+    //middleware logger (next doesnt hang)
+app.use(function(req, res, next) {
+    console.log("Request IP: " + req.url);
+    console.log("Request date: " + new Date());
+    next();
+    });
+
 //get all products
 app.get('/collection/:collectionName', function (req, res, next) {
     req.collection.find({}).toArray(function(error, results){
@@ -60,6 +67,8 @@ app.get('/collection/:collectionName', function (req, res, next) {
  })
 })
 
+
+    
 
 //Post order request - insert   
 app.post('/collection/:collectionName', function (req, res, next) {
@@ -98,6 +107,7 @@ app.put('/collection/:collectionName/:id', function (req, res, next) {
     }
     })
 })
+
 
 
 // error handler middleware
