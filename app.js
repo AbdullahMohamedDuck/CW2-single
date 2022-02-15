@@ -28,6 +28,26 @@ app.get('/',function(req,res){
     res.send('Specify a collection please, E.G: collection/products to view lessons')
 })
 
+// Requires the modules needed, file system, creates path users request - app.use = middleware, app.get = routing. Middleware last
+var path = require("path");
+var fs = require("fs");
+
+ 
+app.use(function(req, res, next) {
+    // Uses path.join to find the path where the file should be
+    var filePath = path.join(__dirname, "/staticimages", req.url);
+    
+    // Built-in fs.stat gets info about a file to check if file exists, if not move onto next
+    fs.stat(filePath, function(error, fileInfo) {
+    if (error) {
+    next();
+    return;
+    }
+    if (fileInfo.isFile()) res.sendFile(filePath);
+    else next();
+        });
+    });
+
 //get all products, fetch
 app.get('/collection/:collectionName', function (req, res, next) {
     req.collection.find({}).toArray(function(error, results){
