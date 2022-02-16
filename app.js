@@ -82,6 +82,7 @@ app.post('/collection/:collectionName', function (req, res, next) {
  })
 })
 
+
 //Get specific ID of product from MongoDb
 const ObjectID = require('mongodb').ObjectID;
 app.get('/collection/:collectionName/:id' , function (req, res, next) {
@@ -107,7 +108,27 @@ app.put('/collection/:collectionName/:id', function (req, res, next) {
     }
     })
 })
-
+//updates number of spaces using unique lessonID after order is submitted
+app.put('/collection/:collectionName/:id',function(req,res,next){
+    req.collection.updateOne(
+        {lessonID: req.params.id},
+        {$set: req.body},
+        {safe: true, multi:false},
+        function(err,result){
+            if (err){
+                return next(err)
+            }
+            else{
+                if(result.acknowledged){
+                    res.send("success")
+                }
+                else{
+                    res.send("error")
+                }
+            }
+        }
+    )
+})
 
 
 // error handler middleware
@@ -120,5 +141,5 @@ app.use(function(req, res) {
 
 //Heroku start port
 app.listen(process.env.PORT || 3000, function(){
-    console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+    console.log("Server has started");
   });
