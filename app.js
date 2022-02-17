@@ -67,7 +67,6 @@ app.get('/collection/:collectionName', function (req, res, next) {
  })
 })
 
-
     
 
 //Post order request - insert   
@@ -95,19 +94,7 @@ if (error) {
 })
 })
 
-// Update ID (updated on req.body req)
-app.put('/collection/:collectionName/:id', function (req, res, next) {
-    req.collection.updateOne(
-    {_id: new ObjectID(req.params.id)},
-    {$set: req.body},
-    {safe: true, multi: false}, function (error, results) {
-    if (error){ 
-        return next(error)
-    }
-    else {res.send(results)
-    }
-    })
-})
+
 //updates number of spaces using unique lessonID after order is submitted
 app.put('/collection/:collectionName/:id',function(req,res,next){
     req.collection.updateOne(
