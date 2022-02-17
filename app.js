@@ -96,9 +96,9 @@ if (error) {
 
 
 //updates number of spaces using unique lessonID after order is submitted
-app.put('/collection/:collectionName/:id',function(req,res,next){
+app.put('/collection/:collectionName/:productID',function(req,res,next){
     req.collection.updateOne(
-        {lessonID: req.params.id},
+        {productID: req.params.productID},
         {$set: req.body},
         {safe: true, multi:false},
         function(err,result){
