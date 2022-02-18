@@ -82,7 +82,7 @@ app.post('/collection/:collectionName', function (req, res, next) {
 })
 
 
-//Get specific ID of product from MongoDb
+//Get specific ID of product from MongoDb using mongoDB _ID
 const ObjectID = require('mongodb').ObjectID;
 app.get('/collection/:collectionName/:id', function (req, res, next) {
     req.collection.findOne({ _id: new ObjectID(req.params.id) }, function (error, results) {
@@ -96,7 +96,7 @@ app.get('/collection/:collectionName/:id', function (req, res, next) {
 })
 
 
-//updates number of spaces using productID after order is submitted
+//Update feature for spaces and other PUT inputs using productID
 app.put('/collection/:collectionName/:productID', function (req, res, next) {
     console.log(req.body);
     req.collection.updateOne(
