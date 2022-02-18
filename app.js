@@ -96,7 +96,7 @@ app.get('/collection/:collectionName/:id', function (req, res, next) {
 })
 
 
-//updates number of spaces using unique lessonID after order is submitted
+//updates number of spaces using productID after order is submitted
 app.put('/collection/:collectionName/:productID', function (req, res, next) {
     console.log(req.body);
     req.collection.updateOne(
@@ -119,6 +119,19 @@ app.put('/collection/:collectionName/:productID', function (req, res, next) {
     )
 })
 
+/* search for lessons backend 
+app.get('/search/:searchValue/:collectionName',function(req,res,next){
+    let searchString = req.params.searchValue
+    req.collection.createIndex( { Subject: "text", Location: "text" } )
+    req.collection.find( { $or: [ { Subject: { $regex: searchString,$options:'i' } }, { Location: {$regex: searchString,$options:'i'} } ] }  ).toArray(function(err,results){
+        if (err){
+            return next(err)
+        }
+        else{
+            res.send(results)
+        }
+    })
+}) */
 
 // error handler middleware
 app.use(function (req, res) {
